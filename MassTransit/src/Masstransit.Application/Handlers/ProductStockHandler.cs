@@ -1,6 +1,5 @@
-using MassTransit;
 using Microsoft.Extensions.Logging;
-using System;
+using System.Text.Json;
 
 namespace MassTransit.Application.Contracts.Handlers;
 
@@ -11,8 +10,9 @@ public class ProductStockHandler: IConsumer<ProductCreateEvent>
     {
         _logger=logger;
     }
-    public Task Consume(ConsumeContext<ProductCreateEvent> context)
+    public async Task Consume(ConsumeContext<ProductCreateEvent> context)
     {
-          return Task.CompletedTask;
+        _logger.LogInformation("Received message: {@Message}", context.Message);
+        Console.WriteLine($"NotificationCreated event consumed. Message: {context.Message}");
     }
 }
