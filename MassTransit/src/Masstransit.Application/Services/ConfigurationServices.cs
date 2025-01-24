@@ -23,4 +23,4 @@ public static class ConfigurationService
       }); 
    return services; 
  } 
-}
+}   

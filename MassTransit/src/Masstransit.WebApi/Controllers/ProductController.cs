@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Masstransit.WebApi.Controllers
 {
-    [Route("api/[controller]")] // api/product
+    [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -19,10 +19,10 @@ namespace Masstransit.WebApi.Controllers
             _publish = publish;
         }
 
-        [HttpPost(Name = "create-product/{productId}")] // api/product/createproduct
-        public IActionResult CreateProduct([FromRoute] long productId, [FromBody] ProductCreateDto productCreateDto)
+        [HttpPost(Name = "create-product/{productId}")]
+        public async Task<IActionResult> CreateProduct([FromRoute] long productId, [FromBody] ProductCreateDto productCreateDto)
         {
-            _ = _publish.Publish<ProductCreateEvent>(new
+            await _publish.Publish<ProductCreateEvent>(new
             {
                 id = productId,
                 Category = productCreateDto.Category,
